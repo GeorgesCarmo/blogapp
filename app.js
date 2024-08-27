@@ -3,16 +3,21 @@ const express = require('express')
 const handlebars = require('express-handlebars')
 const bodyParser = require('body-parser')
 const app = express()
+const admin = require('./routes/admin')
+const path = require('path')
 //const mongoose = require('mongoose')
 
 /*------------------------------------CONFIGURAÇÕES-------------------------------------*/
     // bodyParser
-        app.use(bodyParser.urlencoded({extended: true}))
-        app.use(bodyParser.json())
+        app.use(express.urlencoded({extended: true}))
+        app.use(express.json())
 
     // handlebars    
-        app.engine('handlebars', handlebars({defaultLayouts: 'main'}))
+        app.engine('handlebars', handlebars.engine({defaultLayouts: 'main'}))
         app.set('view engine', 'handlebars')
+
+    // public
+        app.use(express.static( "public"))
 
     // mongoose
         //TODO
@@ -20,7 +25,7 @@ const app = express()
 
 
 /*-----------------------------------------ROTAS----------------------------------------*/
-
+    app.use('/admin', admin)
 
 
 
