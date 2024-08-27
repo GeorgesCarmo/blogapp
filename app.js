@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 const app = express()
 const admin = require('./routes/admin')
 const path = require('path')
-//const mongoose = require('mongoose')
+const mongoose = require('mongoose')
 
 /*------------------------------------CONFIGURAÇÕES-------------------------------------*/
     // bodyParser
@@ -20,7 +20,14 @@ const path = require('path')
         app.use(express.static( "public"))
 
     // mongoose
-        //TODO
+        mongoose.Promise = global.Promise
+        mongoose.connect('mongodb://localhost/blogapp')
+        .then(()=>{
+            console.log("Conectado ao MongoDB")
+        })
+        .catch((err)=>{
+            console.log("Erro ao se conectar: "+err)
+        })
 
 
 
