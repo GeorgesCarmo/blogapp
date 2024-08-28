@@ -12,6 +12,7 @@ require("./models/Postagem")
 const Postagem = mongoose.model("postagens")
 require("./models/Categoria")
 const Categoria = mongoose.model("categorias")
+const usuarios = require('./routes/usuario')
 
 /*------------------------------------CONFIGURAÇÕES-------------------------------------*/
     // bodyParser
@@ -108,6 +109,8 @@ app.get("/categorias/:slug", (req, res)=>{
         res.redirect("/")
     })
 })
+
+app.use("/usuarios", usuarios)
 
 /*----------------------------------------OUTROS----------------------------------------*/
 const PORT = 8081
