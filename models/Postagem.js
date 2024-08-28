@@ -19,6 +19,10 @@ const Postagem = new Schema({
         ref: "categorias",
         required: true
     },
+    conteudo:{
+        type: String,
+        required: true
+    },
     data:{
         type: Date,
         default: Date.now()
