@@ -8,6 +8,8 @@ const mongoose = require('mongoose')
 const session = require('express-session')
 const flash = require('connect-flash')
 const app = express()
+require("./models/Postagem")
+const Postagem = mongoose.model("postagens")
 
 /*------------------------------------CONFIGURAÇÕES-------------------------------------*/
     // bodyParser
@@ -21,11 +23,6 @@ const app = express()
     // public
         app.use(express.static( "public"))
 
-/*        app.use((req, res, next)=>{
-            console.log("Oi, eu sou um midleware")
-            next()
-        })
-*/
     // mongoose
         mongoose.Promise = global.Promise
         mongoose.connect('mongodb://localhost/blogapp')
@@ -52,11 +49,39 @@ const app = express()
         }) 
    
 /*-----------------------------------------ROTAS----------------------------------------*/
-    app.use('/admin', admin)
+app.get("/", (req, res)=>{
+    Postagem.find().lean().populate("categoria").sort({data: "desc"}).then((postagens)=>{
+        res.render("index", {postagens:postagens})
+    }).catch((err)=>{
+        req.flash("error_msg", "Houve um erro interno")
+        res.redirect("/404")
+    })
+    
+})
 
+app.get("/posts", (req, res)=>{
+    res.send("Lista de posts")
+})
 
+app.use('/admin', admin)
 
+app.use("/404", (req, res)=>{
+    res.send("Erro 404")
+})
 
+app.get("/postagem/:slug", (req, res)=>{
+    Postagem.findOne({slug:req.params.slug}).lean().then((postagem)=>{
+        if(postagem){
+            res.render("postagem/index", {postagem:postagem})
+        }else{
+            req.flash("error_msg", "Essa postagem não existe")
+            res.redirect("/")
+        }
+    }).catch((err)=>{
+        req.flash("error_msg", "Houve um erro interno")
+        res.redirect("/")
+    })
+})
 
 /*----------------------------------------OUTROS----------------------------------------*/
 const PORT = 8081
