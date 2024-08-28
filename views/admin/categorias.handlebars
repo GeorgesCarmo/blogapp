@@ -9,16 +9,17 @@
             <small>Slug: {{slug}}</small><br>
             <small>Data de Criação: {{date}}</small><br>
 
-    <div class="container">
+    <div class="container mt-2">
         <div class="row justify-content-md-center">
           <div class="col col-lg-2">
-            <a href="/admin/categorias/edit/{{_id}}"><button class="btn btn-info mt-3">Editar categoria</button></a>
+            <a href="/admin/categorias/edit/{{_id}}"><button class="btn btn-info">Editar categoria</button></a>
             </div>
         <div class="col">  
             <form action="/admin/categorias/deletar" method="post">
                 <input type="hidden" name="id" value="{{_id}}">
-                <button class="btn btn-danger mt-3">Deletar categoria</button>
+                <button class="btn btn-danger">Deletar categoria</button>
             </form>
+        </div>
         </div>
            </div>
         </div>
