@@ -55,6 +55,7 @@ require("./config/authent")(passport)
             res.locals.success_msg = req.flash("success_msg")
             res.locals.error_msg = req.flash("erro_msg")
             res.locals.error = req.flash("error")
+            res.locals.user = req.user || null;
             next()
         }) 
    
