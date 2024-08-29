@@ -4,11 +4,10 @@
 
 {{/each}}
 
-
 <h2>Cadastrar novo usuário</h2>
 <div class="card mt-4">
     <div class="card-body">
-        <form action="" class="post">
+        <form action="" method="post">
 
             <label for="nome">Nome</label>
             <input type="text" name="nome" class="form-control mb-3" required>
@@ -17,10 +16,10 @@
             <input type="email" name="email" class="form-control mb-3" required>
 
             <label for="senha">Senha</label>
-            <input type="password" name="senha" class="form-control mb-3" required>
+            <input type="password" name="senha" class="form-control mb-3" minlength="4" required>
 
             <label for="senha">Repita sua senha</label>
-            <input type="password" name="senha2" class="form-control mb-3" required>
+            <input type="password" name="senha2" class="form-control mb-3" minlength="4" required>
 
             <button type="submit" class="btn btn-success mt-2">Criar conta</button>
         </form>

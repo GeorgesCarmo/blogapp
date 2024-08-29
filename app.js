@@ -46,8 +46,8 @@ const usuarios = require('./routes/usuario')
 
     // middleware
         app.use((req, res, next)=>{
-            res.locals.success_msg = req.flash('success_msg')
-            res.locals.error_msg = req.flash('erro_msg')
+            res.locals.success_msg = req.flash("success_msg")
+            res.locals.error_msg = req.flash("erro_msg")
             next()
         }) 
    
